@@ -32,6 +32,9 @@ jobs:
       - name: Install global dependencies
         run: npm i prisma fastify-cli turbo tsx electron-builder@23.6.0 node-gyp-install -g && node-gyp-install --python=python3
         
+      - name: Fix Python setuptools for native modules
+        run: pip3 install setuptools --break-system-packages || true
+
       - name: Install dependencies
         run: pnpm install
       
