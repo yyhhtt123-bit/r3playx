@@ -96,6 +96,7 @@ export default defineConfig({
   server: {
     port: ELECTRON_WEB_SERVER_PORT,
     strictPort: IS_ELECTRON ? true : false,
+    allowedHosts: true,
     proxy: {
       '/netease/': {
         target: `http://127.0.0.1:${ELECTRON_DEV_NETEASE_API_PORT}`,
