@@ -41,7 +41,6 @@
     /* 移除 scroll-behavior: smooth，避免滚动时的动画感 */
     /* 让浏览器使用原生滚动，更流畅 */
   }
-}
 
 @keyframes pulsate-fwdj-big {
   0% {
