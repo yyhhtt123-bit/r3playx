@@ -22,7 +22,7 @@ jobs:
 
       - uses: pnpm/action-setup@v2.0.1
         with:
-          version: 8.6.12
+          version: 10.12.4
 
       - name: Install Node.js 18
         uses: actions/setup-node@v2
