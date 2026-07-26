@@ -148,7 +148,7 @@ const MenuBar = () => {
   return (
     <div
       className={cx(
-        'app-region-drag relative flex h-full w-full flex-col justify-center',
+        'app-region-drag glass h-full w-full flex-col justify-center',
         'lg:fixed lg:left-0 lg:top-0 lg:bottom-0',
         css`
           ${bp.lg} {
