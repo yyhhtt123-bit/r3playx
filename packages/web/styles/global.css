@@ -4,6 +4,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ========== 液态玻璃变量系统 ========== */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-dark: rgba(0, 0, 0, 0.60);
+  --glass-bg-muted: rgba(255, 255, 255, 0.35);
+  --glass-bg-muted-dark: rgba(0, 0, 0, 0.40);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.20);
+  --glass-bg-subtle-dark: rgba(0, 0, 0, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.50);
+  --glass-border-dark: rgba(255, 255, 255, 0.07);
+  --glass-blur: blur(24px) saturate(160%);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --glass-shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.24);
+  --glass-radius: 20px;
+}
+
 @layer components {
   .app-region-drag {
     -webkit-app-region: drag;
@@ -15,6 +31,64 @@
 
   .no-drag {
     -webkit-user-drag: none;
+  }
+
+  /* ========== 液态玻璃组件类 ========== */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--glass-radius);
+  }
+  .dark .glass {
+    background: var(--glass-bg-dark);
+    border-color: var(--glass-border-dark);
+    box-shadow: var(--glass-shadow-dark);
+  }
+
+  .glass-muted {
+    background: var(--glass-bg-muted);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+  }
+  .dark .glass-muted {
+    background: var(--glass-bg-muted-dark);
+    border-color: var(--glass-border-dark);
+  }
+
+  .glass-subtle {
+    background: var(--glass-bg-subtle);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+  }
+  .dark .glass-subtle {
+    background: var(--glass-bg-subtle-dark);
+    border-color: var(--glass-border-dark);
+  }
+
+  .glass-dark {
+    background: var(--glass-bg-dark);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border-dark);
+    box-shadow: var(--glass-shadow-dark);
+  }
+
+  .glass-square {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+  .dark .glass-square {
+    background: var(--glass-bg-dark);
+    border-color: var(--glass-border-dark);
+    box-shadow: var(--glass-shadow-dark);
   }
 
   .line-clamp-1 {

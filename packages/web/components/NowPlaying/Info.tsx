@@ -11,7 +11,7 @@ const Info = () => {
     <MotionConfig transition={{ ease, duration: 0.5 }}>
       <motion.div
         className={cx(
-          'm-3 flex flex-col items-center rounded-20 bg-white/60 p-8 font-medium backdrop-blur-3xl dark:bg-black/70'
+          'glass m-3 flex flex-col items-center p-8 font-medium'
         )}
       >
         {/* Track Info */}

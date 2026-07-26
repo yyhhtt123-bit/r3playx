@@ -32,6 +32,7 @@ interface Settings {
   keyboardShortcuts: KeyboardShortcutSettings
   showTrackListName: boolean
   enableBreathingEffect: boolean
+  enableStarfield: boolean
 }
 
 const initSettings: Settings = {
@@ -58,6 +59,7 @@ const initSettings: Settings = {
   keyboardShortcuts: getKeyboardShortcutDefaultSettings(),
   showTrackListName: false,
   enableBreathingEffect: true,
+  enableStarfield: true,
 }
 
 const STORAGE_KEY = 'settings'

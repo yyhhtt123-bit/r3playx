@@ -77,7 +77,7 @@ const Login = () => {
       <AnimatePresence>
         {showLoginPanel && (
           <motion.div
-            className='fixed inset-0 z-30 bg-black/80 backdrop-blur-3xl lg:rounded-12'
+            className='glass-dark fixed inset-0 z-30 lg:rounded-12'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -89,7 +89,7 @@ const Login = () => {
       {/* Content */}
       <AnimatePresence>
         {showLoginPanel && (
-          <div className='fixed inset-0 z-30 flex items-center justify-center pt-24 backdrop-blur-xl'>
+          <div className='glass-dark fixed inset-0 z-30 flex items-center justify-center pt-24'>
             <motion.div
               className='flex flex-col items-center'
               variants={{
@@ -141,7 +141,7 @@ const Login = () => {
                   layout='position'
                   transition={{ ease }}
                   onClick={() => (uiStates.showLoginPanel = false)}
-                  className='mt-10 flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-white/50 transition-colors duration-300 hover:bg-white/20 hover:text-white/70'
+                  className='glass-subtle mt-10 flex h-14 w-14 items-center justify-center rounded-full text-white/50 transition-colors duration-300 hover:!bg-white/30 hover:text-white/70'
                 >
                   <Icon name='x' className='h-6 w-6' />
                 </motion.div>

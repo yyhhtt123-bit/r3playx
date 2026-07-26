@@ -109,8 +109,7 @@ const SearchSuggestions = ({
               },
             }}
             className={cx(
-              'border-dark/10 absolute mt-2 origin-top rounded-24 border p-2 backdrop-blur-xxl dark:border-white/10',
-              'bg-white/95 dark:bg-black/95',
+              'glass absolute mt-2 origin-top p-2',
               css`
                 width: 286px;
               `

@@ -14,6 +14,7 @@ import { ease } from '../utils/const'
 import { motion } from 'framer-motion'
 import Router from '@/web/components/Router'
 import BreathingBackground from '@/web/components/BreathingBackground'
+import StarfieldBackground from '@/web/components/Visuals/StarfieldBackground'
 
 // Performance note: When breathing background is enabled, it provides its own
 // blur(40px) effect on the cover image. The separate backdrop-blur-xl mask and
@@ -105,6 +106,9 @@ const Layout = () => {
               'text-black transition-colors duration-400 dark:text-white'
             )}
           >
+            {/* 星空背景 */}
+            <StarfieldBackground />
+
             {/* 呼吸灯背景 — 在前景层内部最底层，覆盖含导航栏的整个区域 */}
             <BreathingBackground />
 

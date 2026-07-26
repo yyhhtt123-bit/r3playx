@@ -57,8 +57,7 @@ function Dropdown({ items, onClose }: { items: DropdownItem[]; onClose: () => vo
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.12 }}
       className={cx(
-        'origin-top rounded-12 border border-white/[.06] p-px py-2.5 shadow-xl outline outline-1 outline-black backdrop-blur-3xl dark:border-white/[.06]',
-        'bg-white dark:bg-black',
+        'glass origin-top rounded-12 p-px py-2.5 shadow-xl',
         css`
           min-width: 200px;
         `
@@ -70,7 +69,7 @@ function Dropdown({ items, onClose }: { items: DropdownItem[]; onClose: () => vo
           data-dropdown-item
           className={cx(
             'relative flex w-full items-center justify-between whitespace-nowrap rounded-[5px] p-3 text-16 font-medium ',
-            'bg-white/90 dark:bg-black/90'
+            'glass-muted'
           )}
           key={index}
           onClick={() => {

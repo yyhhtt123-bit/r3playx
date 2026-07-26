@@ -116,6 +116,24 @@ const BreathingEffect = () => {
   )
 }
 
+const StarfieldEffect = () => {
+  const { t } = useTranslation()
+  const { enableStarfield } = useSnapshot(settings)
+  return (
+    <>
+      <Option>
+        <div className='flex flex-col'>
+          <OptionText>星空背景</OptionText>
+        </div>
+        <Switch
+          enabled={enableStarfield}
+          onChange={value => (settings.enableStarfield = value)}
+        ></Switch>
+      </Option>
+    </>
+  )
+}
+
 const Browse = () => {
   const { showTrackListName } = useSnapshot(settings)
   const { t } = useTranslation()
@@ -148,6 +166,7 @@ const Appearance = () => {
       <ShowDevices />
       <LyricsBlur />
       <BreathingEffect />
+      <StarfieldEffect />
       <Browse />
     </div>
   )
