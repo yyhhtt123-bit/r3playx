@@ -1,193 +1,64 @@
 /* ============================================
-   Mineradio-style 全液态玻璃系统
-   三层架构: 背景层 → 玻璃折射层 → 虹彩光晕层
+   液态玻璃 — 极简纯净版
+   参照: AI液态玻璃对话 项目
    ============================================ */
 
 :root {
-  /* 玻璃基础参数 */
-  --glass-opacity: 0.45;
-  --glass-opacity-dark: 0.50;
-  --glass-blur: 32px;
-  --glass-saturate: 180%;
-  --glass-radius: 18px;
-  --glass-radius-sm: 12px;
-  --glass-radius-xs: 8px;
-
-  /* 虹彩光泽 */
-  --glass-shine-opacity: 0.25;
-  --glass-shine-angle: 135deg;
-
-  /* 背景驱动色 — 由 JS 从封面/背景图提取 */
-  --bg-r: 15; --bg-g: 15; --bg-b: 20;
-
-  /* 玻璃色彩 — 从背景衍生 */
-  --glass-tint: rgba(var(--bg-r), var(--bg-g), var(--bg-b), var(--glass-opacity));
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-border-strong: rgba(255, 255, 255, 0.18);
-
-  /* 虹彩渐变 — 从背景色衍生出流动光晕 */
-  --glass-iridescent: linear-gradient(
-    var(--glass-shine-angle),
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(var(--bg-r), var(--bg-g), var(--bg-b), 0.08) 30%,
-    rgba(255, 255, 255, 0.06) 50%,
-    rgba(var(--bg-r), var(--bg-g), var(--bg-b), 0.10) 70%,
-    rgba(255, 255, 255, 0.15) 100%
-  );
-
-  /* 阴影 — 玻璃特有的柔和投影 */
-  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.10);
-  --glass-shadow-dark: 0 4px 24px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --glass-bg: rgba(255, 255, 255, 0.50);
+  --glass-bg-dark: rgba(255, 255, 255, 0.08);
+  --glass-bg-strong: rgba(255, 255, 255, 0.65);
+  --glass-bg-strong-dark: rgba(255, 255, 255, 0.12);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.25);
+  --glass-bg-subtle-dark: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.55);
+  --glass-border-dark: rgba(255, 255, 255, 0.10);
+  --glass-blur: 40px;
+  --glass-radius: 22px;
+  --glass-radius-sm: 14px;
+  --glass-radius-xs: 10px;
 }
 
-/* ============================================
-   全局背景层 — 铺在整个 app 下
-   ============================================ */
-.glass-root {
-  position: relative;
-  overflow: hidden;
-}
-
-.glass-root::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(ellipse 80% 60% at 30% 20%, rgba(var(--bg-r), var(--bg-g), var(--bg-b), 0.40), transparent 70%),
-    radial-gradient(ellipse 60% 50% at 70% 80%, rgba(var(--bg-r), var(--bg-g), var(--bg-b), 0.30), transparent 60%),
-    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(var(--bg-r), var(--bg-g), var(--bg-b), 0.15), transparent 100%);
-  transition: background 1.2s ease;
-}
-
-/* ============================================
-   核心玻璃基类 — 折射 + 虹彩
-   ============================================ */
+/* ---------- 基类 ---------- */
 .glass {
-  background: var(--glass-tint);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: var(--glass-radius);
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--glass-shadow-dark);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.20);
 }
 
-/* 虹彩光泽层 */
-.glass::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: var(--glass-iridescent);
-  pointer-events: none;
-  z-index: 1;
-  opacity: var(--glass-shine-opacity);
-  transition: opacity 0.6s ease;
-}
-
-/* 顶边高光线 — 模拟玻璃厚度 */
-.glass::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 8px;
-  right: 8px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.20), transparent);
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* hover 时增强虹彩 */
-.glass:hover::after {
-  opacity: calc(var(--glass-shine-opacity) + 0.15);
-}
-
-/* 点击时虹彩减弱 — 物理感 */
-.glass:active::after {
-  opacity: calc(var(--glass-shine-opacity) - 0.05);
-}
-
-/* ============================================
-   暗色模式（默认）
-   ============================================ */
 .dark .glass,
 .glass-dark {
-  --glass-tint: rgba(var(--bg-r), var(--bg-g), var(--bg-b), var(--glass-opacity-dark));
-  --glass-border: rgba(255, 255, 255, 0.07);
-  --glass-border-strong: rgba(255, 255, 255, 0.12);
-  box-shadow: var(--glass-shadow-dark);
+  background: var(--glass-bg-dark);
+  border-color: var(--glass-border-dark);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-/* ============================================
-   变体
-   ============================================ */
-
-/* 强玻璃 — 面板、卡片、对话框 */
+/* ---------- 强玻璃：卡片 / 弹窗 ---------- */
 .glass-strong {
-  --glass-opacity: 0.65;
-  --glass-opacity-dark: 0.70;
-  --glass-blur: 40px;
+  background: var(--glass-bg-strong);
+}
+.dark .glass-strong {
+  background: var(--glass-bg-strong-dark);
 }
 
-/* 轻玻璃 — 小组件、按钮背景 */
+/* ---------- 轻玻璃：工具栏 / 小组件 ---------- */
 .glass-subtle {
-  --glass-opacity: 0.25;
-  --glass-opacity-dark: 0.30;
-  --glass-blur: 16px;
+  background: var(--glass-bg-subtle);
   box-shadow: none;
 }
+.dark .glass-subtle {
+  background: var(--glass-bg-subtle-dark);
+}
 
-/* 无缝玻璃 — 拼接成大区域（侧栏+主体） */
-.glass-seamless {
+/* ---------- 无圆角无缝玻璃 ---------- */
+.glass-flat {
   border-radius: 0;
   border: none;
-  box-shadow: none;
 }
 
-.glass-seamless::before,
-.glass-seamless::after {
-  display: none;
-}
-
-/* 圆角玻璃 — 按钮、标签 */
-.glass-pill {
-  --glass-radius: 9999px;
-  --glass-opacity: 0.35;
-  --glass-opacity-dark: 0.40;
-  --glass-blur: 20px;
-}
-
-/* 小圆角玻璃 */
-.glass-sm {
-  --glass-radius: 12px;
-}
-
-.glass-xs {
-  --glass-radius: 8px;
-}
-
-/* ============================================
-   流光动画 — 鼠标移动时虹彩角度跟随
-   ============================================ */
-.glass-shimmer {
-  transition: --glass-shine-angle 0.3s ease;
-}
-
-/* ============================================
-   触控/聚焦反馈
-   ============================================ */
-.glass-focus:focus-within {
-  border-color: var(--glass-border-strong);
-  box-shadow: var(--glass-shadow-dark), 0 0 0 3px rgba(var(--bg-r), var(--bg-g), var(--bg-b), 0.15);
-}
-
-/* ============================================
-   内部元素保护 — 确保文字/图标在玻璃之上
-   ============================================ */
-.glass > * {
-  position: relative;
-  z-index: 3;
-}
+/* ---------- 圆角变体 ---------- */
+.glass-sm { border-radius: var(--glass-radius-sm); }
+.glass-xs { border-radius: var(--glass-radius-xs); }
+.glass-round { border-radius: 9999px; }

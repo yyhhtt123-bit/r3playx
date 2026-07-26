@@ -101,7 +101,7 @@ const Controls = () => {
                   player.prevTrack()
                 }}
                 disabled={!track}
-                className='glass-rounded p-2.5 transition-colors duration-400 hover:brightness-105'
+                className='glass glass-round p-2.5 transition-colors duration-400'
               >
                 <Icon name='previous' className='h-6 w-6' />
               </motion.button>
@@ -112,7 +112,7 @@ const Controls = () => {
                   track && player.playOrPause()
                   window.ipcRenderer?.send(IpcChannels.Pause)
                 }}
-                className='glass-rounded p-2.5 transition-colors duration-400 hover:brightness-105'
+                className='glass glass-round p-2.5 transition-colors duration-400'
               >
                 <Icon
                   name={
@@ -129,7 +129,7 @@ const Controls = () => {
                   player.nextTrack()
                 }}
                 disabled={!track}
-                className='glass-rounded p-2.5 transition-colors duration-400 hover:brightness-105'
+                className='glass glass-round p-2.5 transition-colors duration-400'
               >
                 <Icon name='next' className='h-6 w-6 ' />
               </motion.button>
