@@ -116,7 +116,7 @@ const Layout = () => {
             className={cx(
               'rounded-12',
               !enableBreathingEffect && 'backdrop-blur-md',
-              'relative grid h-screen select-none overflow-hidden',
+              'glass-muted relative grid h-screen select-none overflow-hidden',
               'text-black transition-colors duration-400 dark:text-white'
             )}
           >
