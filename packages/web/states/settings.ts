@@ -5,6 +5,15 @@ import i18n, { getInitLanguage, SupportedLanguage, supportedLanguages } from '..
 import { getKeyboardShortcutDefaultSettings } from '@/shared/defaultSettings'
 
 interface Settings {
+  /* === DIY 视觉控制台 === */
+  glassOpacity: number         // 玻璃透明度 0-1
+  glassBlur: number            // 模糊力度 px
+  glassSaturate: number        // 饱和度百分比
+  starfieldCount: number       // 星空粒子数量
+  starfieldDrift: number       // 星空漂移速度
+  activeVisualPreset: number   // 当前预设槽位 0-3
+  visualPresets: { name: string; glassOpacity: number; glassBlur: number; glassSaturate: number; starfieldCount: number; starfieldDrift: number }[]
+
   accentColor: string
   language: SupportedLanguage
   qqCookie: string
@@ -36,6 +45,19 @@ interface Settings {
 }
 
 const initSettings: Settings = {
+  glassOpacity: 0.55,
+  glassBlur: 24,
+  glassSaturate: 160,
+  starfieldCount: 160,
+  starfieldDrift: 1,
+  activeVisualPreset: -1,
+  visualPresets: [
+    { name: '', glassOpacity: 0.55, glassBlur: 24, glassSaturate: 160, starfieldCount: 160, starfieldDrift: 1 },
+    { name: '', glassOpacity: 0.55, glassBlur: 24, glassSaturate: 160, starfieldCount: 160, starfieldDrift: 1 },
+    { name: '', glassOpacity: 0.55, glassBlur: 24, glassSaturate: 160, starfieldCount: 160, starfieldDrift: 1 },
+    { name: '', glassOpacity: 0.55, glassBlur: 24, glassSaturate: 160, starfieldCount: 160, starfieldDrift: 1 },
+  ],
+
   accentColor: 'yellow',
   language: getInitLanguage(),
   qqCookie: '',

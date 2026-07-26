@@ -1,6 +1,7 @@
 import { memo, useEffect, useRef } from 'react'
 import settings from '@/web/states/settings'
 import { useSnapshot } from 'valtio'
+import settings from '@/web/states/settings'
 
 /**
  * Starfield canvas background — inspired by Mineradio.

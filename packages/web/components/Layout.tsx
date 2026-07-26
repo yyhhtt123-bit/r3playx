@@ -12,9 +12,11 @@ import ContextMenus from './ContextMenus/ContextMenus'
 import settings from '@/web/states/settings'
 import { ease } from '../utils/const'
 import { motion } from 'framer-motion'
+import { useEffect } from 'react'
 import Router from '@/web/components/Router'
 import BreathingBackground from '@/web/components/BreathingBackground'
 import StarfieldBackground from '@/web/components/Visuals/StarfieldBackground'
+import VisualConsole from '@/web/components/Visuals/VisualConsole'
 
 // Performance note: When breathing background is enabled, it provides its own
 // blur(40px) effect on the cover image. The separate backdrop-blur-xl mask and
@@ -22,6 +24,18 @@ import StarfieldBackground from '@/web/components/Visuals/StarfieldBackground'
 // memory. We conditionally skip them when breathing is active.
 
 const Layout = () => {
+  // 初始化 CSS 自定义属性
+  useEffect(() => {
+    const s = settings
+    const root = document.documentElement
+    root.style.setProperty('--glass-opacity', String(s.glassOpacity))
+    root.style.setProperty('--glass-opacity-dark', String(Math.min(1, s.glassOpacity + 0.05)))
+    root.style.setProperty('--glass-blur-px', s.glassBlur + 'px')
+    root.style.setProperty('--glass-saturate-pct', s.glassSaturate + '%')
+    root.style.setProperty('--starfield-count', String(s.starfieldCount))
+    root.style.setProperty('--starfield-drift', String(s.starfieldDrift))
+  }, [])
+
   const playerSnapshot = useSnapshot(player)
   const { fullscreen } = useSnapshot(uiStates)
   const showPlayer = !!playerSnapshot.track
@@ -125,6 +139,7 @@ const Layout = () => {
               window.localStorage.getItem('showWindowsTitleBar') === 'true') && <TitleBar />}
 
             <ContextMenus />
+            <VisualConsole />
           </div>
         </div>
       )}

@@ -6,15 +6,24 @@
 
 /* ========== 液态玻璃变量系统 ========== */
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.55);
-  --glass-bg-dark: rgba(0, 0, 0, 0.60);
-  --glass-bg-muted: rgba(255, 255, 255, 0.35);
-  --glass-bg-muted-dark: rgba(0, 0, 0, 0.40);
-  --glass-bg-subtle: rgba(255, 255, 255, 0.20);
-  --glass-bg-subtle-dark: rgba(0, 0, 0, 0.25);
+  /* 可调参数 — 由 JS 运行时写入 */
+  --glass-opacity: 0.55;
+  --glass-opacity-dark: 0.60;
+  --glass-blur-px: 24px;
+  --glass-saturate-pct: 160%;
+  --starfield-count: 160;
+  --starfield-drift: 1;
+
+  /* 派生值 */
+  --glass-bg: rgba(255, 255, 255, var(--glass-opacity));
+  --glass-bg-dark: rgba(0, 0, 0, var(--glass-opacity-dark));
+  --glass-bg-muted: rgba(255, 255, 255, calc(var(--glass-opacity) * 0.65));
+  --glass-bg-muted-dark: rgba(0, 0, 0, calc(var(--glass-opacity-dark) * 0.65));
+  --glass-bg-subtle: rgba(255, 255, 255, calc(var(--glass-opacity) * 0.35));
+  --glass-bg-subtle-dark: rgba(0, 0, 0, calc(var(--glass-opacity-dark) * 0.4));
   --glass-border: rgba(255, 255, 255, 0.50);
   --glass-border-dark: rgba(255, 255, 255, 0.07);
-  --glass-blur: blur(24px) saturate(160%);
+  --glass-blur: blur(var(--glass-blur-px)) saturate(var(--glass-saturate-pct));
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   --glass-shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.24);
   --glass-radius: 20px;
