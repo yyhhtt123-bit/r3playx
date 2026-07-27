@@ -38,7 +38,7 @@ jobs:
       # job via workflow_dispatch.
       fail-fast: false
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        os: [windows-latest]
 
     steps:
       - name: Check out Git repository
